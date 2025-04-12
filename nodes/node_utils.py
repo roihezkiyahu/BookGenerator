@@ -4,27 +4,38 @@ import os
 import json
 logger = logging.getLogger(__name__)
 
-def get_font(font_size: int = 60) -> ImageFont.FreeTypeFont:
-    """Get an appropriate font for text rendering.
-    
+def get_font(font_size: int = 60):
+    """
+    Get an appropriate font for text rendering.
+
     Args:
         font_size: Size of the font to use.
-        
+
     Returns:
-        PIL.ImageFont: The font to use for text rendering.
+        PIL.ImageFont.FreeTypeFont: The font to use for text rendering.
     """
     try:
         font = ImageFont.truetype("comic", font_size)
-        logger.info("Using Comic Sans MS font")
+        logger.info("Using Comic Sans MS font (system)")
         return font
     except IOError:
         try:
-            font = ImageFont.truetype("arial", font_size)
-            logger.info("Using Arial font")
+            font = ImageFont.truetype("COMIC.TTF", font_size)
+            logger.info("Using Comic Sans MS font (local .ttf)")
             return font
         except IOError:
-            logger.info("Using default font")
-            return ImageFont.load_default()
+            try:
+                font = ImageFont.truetype("arial", font_size)
+                logger.info("Using Arial font (system)")
+                return font
+            except IOError:
+                try:
+                    font = ImageFont.truetype("Arial.ttf", font_size)
+                    logger.info("Using Arial font (local .ttf)")
+                    return font
+                except IOError:
+                    logger.warning("All fonts unavailable. Using default font (fixed size).")
+                    return ImageFont.load_default()
 
 def calculate_text_width(text, font, draw):
     """Calculate the width of text with the given font.
