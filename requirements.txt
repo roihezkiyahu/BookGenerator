@@ -11,3 +11,4 @@ ipython
 langchain_community
 pprintpp
 google-genai
+langfuse
