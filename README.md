@@ -9,6 +9,12 @@ A tool that automatically generates children's books with story text and matchin
 - Image creation using AI models
 - Final book assembly with merged images and text
 
+## Workflow
+
+The book generation process follows this LangGraph workflow:
+
+![LangGraph Workflow](graph.png)
+
 ## Live Demo
 
 You can try out the Book Creator application directly through our Streamlit app:
