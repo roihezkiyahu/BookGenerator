@@ -65,6 +65,7 @@ Here are some existing details provided for a children's storybook:
 {context_str}
 
 Based on the context above, please generate creative values *only* for the following missing fields: [{missing_str}].
+You can also generate more characters if you think it's necessary.
 If no fields are listed as missing, please review the existing details and refine them slightly for better coherence or creativity, while keeping the original spirit.
 
 Follow these guidelines when generating missing information:
