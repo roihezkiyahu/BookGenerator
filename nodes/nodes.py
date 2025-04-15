@@ -433,7 +433,8 @@ def generate_images(state: AgentState) -> AgentState:
         if state["generated_images"]:
             img = list(state['generated_images'].items())[-1]
             final_prompt += """Make sure the final image is similar in drawing style, colors, lightning, etc.
-                                If Any charaters repeat themselfs make sure they look similar, if the scene is the same make sure it looks similar but from a different angle"""
+                                If Any charaters repeat themselfs in the new prompt make sure they look similar. do not include charaters from the previous image if not needed.
+                                Make sure the scene is similar looking, but you have to chage it, at least the angle of the camera"""
             contents = [img, final_prompt]
         else:
             contents = [final_prompt]
