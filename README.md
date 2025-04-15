@@ -70,6 +70,7 @@ GEMINI_API_KEY=your_gemini_api_key
 LANGFUSE_SECRET_KEY=your_langfuse_secret_key
 LANGFUSE_PUBLIC_KEY=your_langfuse_public_key
 LANGFUSE_HOST=https://cloud.langfuse.com  # Or your custom Langfuse host
+GEMINI_MODEL=gemini/gemini-2.0-flash # Or another gemini model supported by litellm
 ```
 
 ### Notes on API Keys:
