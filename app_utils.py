@@ -76,8 +76,7 @@ Follow these guidelines when generating missing information:
 
 Constraints:
 - The final "number_of_pages" MUST be exactly {current_pages}.
-- If characters were provided in the context, use those exact characters in the output. Do not add or remove characters if they were provided.
-
+- If characters were provided in the context, use those exact characters in the output. Do not remove characters if they were provided but you can add more if you think it's necessary.
 Output the *complete* story details, incorporating both the existing information (from the context) and the newly generated information (for the missing fields), as a single JSON object.
 The JSON object MUST have keys: "title", "story_description", "image_style", "number_of_pages", "characters" (where characters is a list of objects, each with "name" and "description").
 """
