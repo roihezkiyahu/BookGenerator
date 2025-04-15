@@ -33,7 +33,7 @@ def generate_story(state: AgentState) -> AgentState:
     
     if state.get("title", None) is None:
         response = completion(
-            model="gemini/gemini-2.0-flash", 
+            model=os.getenv('GEMINI_MODEL', "gemini/gemini-2.0-flash"), 
             messages=[{"role": "user", "content": "Generate a title for a story"}],
             response_format={"type": "string"},
             temperature=0.7
@@ -111,7 +111,7 @@ def generate_story(state: AgentState) -> AgentState:
         - pages should be short and to the point, each page should be a about 2 - 3 sentences.
         """
     response = completion(
-        model="gemini/gemini-2.0-flash", 
+        model=os.getenv('GEMINI_MODEL', "gemini/gemini-2.0-flash"), 
         messages=[{"role": "user", "content": prompt if not prompt_validation else prompt_validation}],
         response_format={"type": "json_object", "schema": response_schema},
         temperature=0.7
@@ -186,7 +186,7 @@ def validate_story(state: AgentState) -> AgentState:
     }
 
     response = completion(
-        model="gemini/gemini-2.0-flash", 
+        model=os.getenv('GEMINI_MODEL', "gemini/gemini-2.0-flash"), 
         messages=[{"role": "user", "content": prompt}],
         response_format={"type": "json_object", "schema": response_schema},
         temperature=0
@@ -276,7 +276,7 @@ def image_prompt_generator(state: AgentState) -> AgentState:
         - pages should be short and to the point, each page should be a about 2 - 3 sentences.
         """
     response = completion(
-        model="gemini/gemini-2.0-flash", 
+        model=os.getenv('GEMINI_MODEL', "gemini/gemini-2.0-flash"), 
         messages=[{"role": "user", "content": prompt if not prompt_validation else prompt_validation}],
         response_format={"type": "json_object", "schema": response_schema},
         temperature=0.7
@@ -345,7 +345,7 @@ def validate_image_prompts(state: AgentState) -> AgentState:
     }
 
     response = completion(
-        model="gemini/gemini-2.0-flash", 
+        model=os.getenv('GEMINI_MODEL', "gemini/gemini-2.0-flash"), 
         messages=[{"role": "user", "content": prompt}],
         response_format={"type": "json_object", "schema": response_schema},
         temperature=0
@@ -433,7 +433,7 @@ def generate_images(state: AgentState) -> AgentState:
         if state["generated_images"]:
             img = list(state['generated_images'].items())[-1]
             final_prompt += """Make sure the final image is similar in drawing style, colors, lightning, etc.
-                                If Any charaters repeat themselfs make sure they look similar"""
+                                If Any charaters repeat themselfs make sure they look similar, if the scene is the same make sure it looks similar but from a different angle"""
             contents = [img, final_prompt]
         else:
             contents = [final_prompt]
