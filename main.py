@@ -12,7 +12,10 @@ from pprint import pprint
 load_dotenv()
 from langfuse.callback import CallbackHandler
 
-langfuse_handler = CallbackHandler()
+try:
+    langfuse_handler = CallbackHandler()
+except:
+    langfuse_handler = None
 
 os.environ["GEMINI_API_KEY"] = os.getenv("GEMINI_API_KEY")
 
@@ -57,11 +60,11 @@ def build_graph(with_langfuse: bool = False):
     graph_builder.add_edge("validate_image_prompts", "image_prompt_generator")
 
 
-    graph = graph_builder.compile().with_config({"callbacks": [langfuse_handler] if with_langfuse else []})
+    graph = graph_builder.compile().with_config({"callbacks": [langfuse_handler] if with_langfuse and langfuse_handler is not None else []})
     return graph
 
 if __name__ == "__main__":
-    graph = build_graph(with_langfuse=True)
+    graph = build_graph(with_langfuse=False)
 
     with open('output.png', 'wb') as f:
         f.write(Image(graph.get_graph().draw_mermaid_png()).data)
@@ -81,4 +84,5 @@ if __name__ == "__main__":
     #                             image_style="digital art style children's book",
     #                             use_imagen_3=False,
     #                             generated_images={}))
+
     pprint(json.dumps(response, indent=4))
