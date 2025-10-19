@@ -10,9 +10,9 @@ import json
 from nodes.nodes import generate_story, validate_story, is_story_valid, validate_image_prompts, image_prompt_generator, is_valid_image_prompts, check_images_existance, merge_images, generate_images
 from pprint import pprint
 load_dotenv()
-from langfuse.callback import CallbackHandler
 
 try:
+    from langfuse.callback import CallbackHandler
     langfuse_handler = CallbackHandler()
 except:
     langfuse_handler = None
@@ -86,3 +86,4 @@ if __name__ == "__main__":
     #                             generated_images={}))
 
     pprint(json.dumps(response, indent=4))
+
